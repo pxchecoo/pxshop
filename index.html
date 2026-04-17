@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PxShop — Webs que destacan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --white:      #ffffff;
+      --off-white:  #f8f7ff;
+      --gray-50:    #f4f3fa;
+      --gray-100:   #ebe9f8;
+      --gray-200:   #d8d5ef;
+      --gray-400:   #9d97c4;
+      --gray-600:   #6b65a0;
+      --violet-100: #ede9ff;
+      --violet-200: #d4ccff;
+      --violet-300: #b8aeff;
+      --violet-400: #9b8ef8;
+      --violet-500: #7c6de8;
+      --violet-600: #6455d1;
+      --violet-700: #4e40b8;
+      --text-main:  #1a1730;
+      --text-sub:   #5e5880;
+      --text-muted: #9692b8;
+      --radius-sm:  12px;
+      --radius-md:  20px;
+      --radius-lg:  32px;
+      --radius-xl:  48px;
+      --shadow-sm:  0 2px 12px rgba(100, 85, 209, 0.08);
+      --shadow-md:  0 8px 32px rgba(100, 85, 209, 0.12);
+      --shadow-lg:  0 20px 60px rgba(100, 85, 209, 0.16);
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--off-white); }
+    ::-webkit-scrollbar-thumb { background: var(--violet-300); border-radius: 99px; }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2, h3, h4 { font-family: 'Sora', sans-serif; letter-spacing: -0.02em; line-height: 1.15; }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    nav.scrolled {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 14px 5%;
+    }
+
+    .nav-logo {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.03em;
+    }
+
+    .nav-logo span {
+      color: var(--violet-500);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--violet-500); }
+
+    .nav-cta {
+      background: var(--violet-500);
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 99px;
+      font-weight: 600 !important;
+      font-size: 0.875rem !important;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--violet-600) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(124, 109, 232, 0.35) !important;
+      color: var(--white) !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-main);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+    }
+
+    .hero-blob-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--violet-200) 0%, transparent 70%);
+      top: -100px; left: -100px;
+      animation: float1 8s ease-in-out infinite;
+    }
+
+    .hero-blob-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--violet-300) 0%, transparent 70%);
+      bottom: -80px; right: -80px;
+      animation: float2 10s ease-in-out infinite;
+    }
+
+    .hero-blob-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, var(--violet-100) 0%, transparent 70%);
+      top: 40%; left: 60%;
+      animation: float3 12s ease-in-out infinite;
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, 30px) scale(1.05); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, -40px) scale(1.08); }
+    }
+    @keyframes float3 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--violet-100);
+      border: 1px solid var(--violet-200);
+      color: var(--violet-600);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 99px;
+      margin-bottom: 28px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: revealUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+    }
+
+    .hero-badge-dot {
+      width: 7px; height: 7px;
+      background: var(--violet-500);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: revealUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s forwards;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--violet-500) 0%, var(--violet-400) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-sub);
+      font-weight: 400;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: revealUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: revealUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.55s forwards;
+    }
+
+    @keyframes revealUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--violet-500);
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 99px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 28px rgba(124, 109, 232, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--violet-600);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(124, 109, 232, 0.4);
+    }
+
+    .btn-primary:active { transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-sub);
+      padding: 16px 28px;
+      border-radius: 99px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1.5px solid var(--gray-200);
+      transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--violet-300);
+      color: var(--violet-600);
+      background: var(--violet-100);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: revealUp 1s ease 1.2s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1.5px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--violet-300), transparent);
+      animation: scrollDown 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.6); opacity: 0.5; }
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 100px 5%; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--violet-500);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-sub);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── SERVICES ─── */
+    #servicios { background: var(--off-white); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 36px 30px;
+      border: 1px solid var(--gray-100);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  border-color 0.4s ease;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--violet-100) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--violet-200);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--violet-100);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+      transition: background 0.4s ease, transform 0.4s ease;
+      position: relative;
+    }
+
+    .service-card:hover .service-icon {
+      background: var(--violet-200);
+      transform: scale(1.08);
+    }
+
+    .service-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      line-height: 1.7;
+      position: relative;
+    }
+
+    /* ─── PRICING INFO ─── */
+    #precios { background: var(--white); }
+
+    .pricing-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: linear-gradient(135deg, var(--violet-100) 0%, var(--off-white) 100%);
+      border: 1.5px solid var(--violet-200);
+      border-radius: var(--radius-lg);
+      padding: 52px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, var(--violet-200) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .pricing-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 150px; height: 150px;
+      background: radial-gradient(circle, var(--violet-100) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .pricing-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .pricing-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing-note {
+      font-size: 1rem;
+      color: var(--text-sub);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      border: 1px solid var(--violet-200);
+      border-radius: var(--radius-sm);
+      padding: 14px 22px;
+      font-size: 0.9rem;
+      color: var(--violet-600);
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── ABOUT ─── */
+    #sobre-mi { background: var(--off-white); }
+
+    .about-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 280px;
+      background: linear-gradient(135deg, var(--violet-300) 0%, var(--violet-500) 100%);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 100px; height: 100px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--white);
+      border: 2px solid var(--violet-200);
+      border-radius: var(--radius-sm);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .about-badge-icon { font-size: 1.1rem; }
+
+    .about-badge-text {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .about-badge-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .about-text h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--text-sub);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .about-tag {
+      background: var(--violet-100);
+      border: 1px solid var(--violet-200);
+      color: var(--violet-600);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 99px;
+    }
+
+    /* ─── CONTACT ─── */
+    #contacto { background: var(--white); }
+
+    .contact-wrapper {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-card {
+      background: var(--off-white);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-lg);
+      padding: 52px 40px;
+      margin-top: 0;
+    }
+
+    .contact-email-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-sm);
+      padding: 18px 24px;
+      margin: 28px 0;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-email-icon {
+      width: 36px; height: 36px;
+      background: var(--violet-100);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .contact-note {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-top: 20px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--text-main);
+      color: rgba(255,255,255,0.5);
+      padding: 40px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.03em;
+    }
+
+    .footer-logo span { color: var(--violet-400); }
+
+    .footer-copy { font-size: 0.82rem; }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover { color: var(--violet-400); }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover { color: var(--violet-500); }
+
+    .mobile-close {
+      position: absolute;
+      top: 24px; right: 5%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-sub);
+      background: none;
+      border: none;
+      font-family: 'Sora', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      section { padding: 80px 6%; }
+
+      .about-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .about-visual {
+        display: flex;
+        justify-content: center;
+      }
+
+      .about-tags { justify-content: center; }
+
+      .pricing-card { padding: 40px 28px; }
+
+      .contact-card { padding: 40px 24px; }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+
+      .footer-links { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── MOBILE MENU ─── -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+    <a href="#servicios" onclick="closeMobileMenu()">Servicios</a>
+    <a href="#precios" onclick="closeMobileMenu()">Precios</a>
+    <a href="#sobre-mi" onclick="closeMobileMenu()">Sobre mí</a>
+    <a href="#contacto" onclick="closeMobileMenu()">Contacto</a>
+  </div>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">Px<span>Shop</span></a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+    <div class="hamburger" onclick="openMobileMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+      <div class="hero-blob hero-blob-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Desarrollo web profesional
+      </div>
+      <h1 class="hero-title">
+        Creamos webs modernas para<br><em>destacar tu negocio</em>
+      </h1>
+      <p class="hero-sub">
+        Diseño limpio, rápido y profesional.<br>
+        Tu presencia digital, llevada al siguiente nivel.
+      </p>
+      <div class="hero-actions">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pachecofabian764@gmail.com&su=Quiero%20una%20web%20con%20PxShop&body=Hola,%20quiero%20informacion%20sobre%20una%20pagina%20web" target="_blank" class="btn-primary">
+          <span>✉</span> Contáctame
+        </a>
+        <a href="#servicios" class="btn-secondary">
+          Ver servicios →
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Explorar</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICIOS ─── -->
+  <section id="servicios">
+    <div class="section-header reveal">
+      <span class="section-tag">Lo que ofrezco</span>
+      <h2 class="section-title">Servicios diseñados para crecer</h2>
+      <p class="section-sub">Cada proyecto es único. Trabajo contigo para crear exactamente lo que tu negocio necesita.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">🎨</div>
+        <h3 class="service-title">Diseño de páginas web</h3>
+        <p class="service-desc">Sitios web modernos, únicos y personalizados que reflejan la identidad de tu marca y atraen clientes.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">⚡</div>
+        <h3 class="service-title">Optimización y velocidad</h3>
+        <p class="service-desc">Páginas ultra rápidas, optimizadas para motores de búsqueda y con tiempos de carga mínimos.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">📱</div>
+        <h3 class="service-title">Diseño responsive</h3>
+        <p class="service-desc">Tu web perfecta en cualquier dispositivo: móvil, tablet o escritorio. Experiencia fluida siempre.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-icon">🛠</div>
+        <h3 class="service-title">Personalización completa</h3>
+        <p class="service-desc">Sin plantillas genéricas. Todo construido desde cero según tus necesidades, colores y visión.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRECIOS ─── -->
+  <section id="precios">
+    <div class="section-header reveal">
+      <span class="section-tag">Información importante</span>
+      <h2 class="section-title">Precios y consideraciones</h2>
+      <p class="section-sub">Quiero ser completamente transparente contigo desde el principio.</p>
+    </div>
+    <div class="pricing-wrapper reveal">
+      <div class="pricing-card">
+        <span class="pricing-icon">💡</span>
+        <h3 class="pricing-title">¿Qué incluye el servicio?</h3>
+        <p class="pricing-note">
+          El precio que cotizo cubre el <strong>diseño, desarrollo y entrega</strong> de tu página web lista para publicar. 
+          Trabajo con atención al detalle y enfoque en resultados reales para tu negocio.
+        </p>
+        <div class="pricing-highlight">
+          <span>⚠️</span>
+          <div>
+            <div style="font-weight:600; color: var(--text-main);">Dominio y hosting NO incluidos</div>
+            <div style="font-size:0.8rem; color: var(--text-muted); margin-top:3px;">Se pagan por separado según el proveedor que elijas</div>
+          </div>
+        </div>
+        <p class="pricing-note" style="margin-top:24px; font-size:0.88rem;">
+          Puedo orientarte sobre los mejores proveedores de dominio y hosting según tu presupuesto y necesidades.
+        </p>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pachecofabian764@gmail.com&su=Quiero%20una%20web%20con%20PxShop&body=Hola,%20quiero%20informacion%20sobre%20una%20pagina%20web" target="_blank" class="btn-primary" style="margin-top:8px;">
+  Consultar precios →
+</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SOBRE MÍ ─── -->
+  <section id="sobre-mi">
+    <div class="about-wrapper">
+      <div class="about-visual reveal">
+        <div class="about-avatar">👨‍💻</div>
+        <div class="about-badge">
+          <span class="about-badge-icon">✅</span>
+          <div>
+            <div class="about-badge-text">Disponible ahora</div>
+            <div class="about-badge-sub">Acepto nuevos proyectos</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-2">
+        <span class="section-tag">Sobre mí</span>
+        <h2>Desarrollador web con foco en lo que importa</h2>
+        <p>
+          Soy desarrollador web apasionado por crear experiencias digitales que no solo se ven bien, sino que funcionan de verdad. Cada proyecto que entrego está pensado con cuidado, desde la primera línea de código hasta el último detalle visual.
+        </p>
+        <p>
+          Me especializo en webs modernas, rápidas y profesionales. Mi prioridad es siempre la experiencia del usuario y que tu negocio se vea como lo que es: serio y confiable.
+        </p>
+        <div class="about-tags">
+          <span class="about-tag">HTML / CSS / JS</span>
+          <span class="about-tag">Diseño UI</span>
+          <span class="about-tag">Mobile First</span>
+          <span class="about-tag">SEO básico</span>
+          <span class="about-tag">Sitios rápidos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACTO ─── -->
+  <section id="contacto">
+    <div class="section-header reveal">
+      <span class="section-tag">Hablemos</span>
+      <h2 class="section-title">¿Listo para empezar?</h2>
+      <p class="section-sub">Cuéntame sobre tu proyecto y te respondo a la brevedad con ideas y un presupuesto.</p>
+    </div>
+    <div class="contact-wrapper">
+      <div class="contact-card reveal">
+        <h3 style="font-family:'Sora',sans-serif; font-size:1.2rem; font-weight:700; color:var(--text-main); margin-bottom:8px;">Escríbeme directamente</h3>
+        <p style="color:var(--text-sub); font-size:0.9rem; line-height:1.6;">
+          Prefiero el contacto directo para poder entender bien tu proyecto y ofrecerte la mejor solución.
+        </p>
+        <div class="contact-email-display">
+          <div class="contact-email-icon">✉️</div>
+          <span>pachecofabian764@gmail.com</span>
+        </div>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pachecofabian764@gmail.com&su=Quiero%20una%20web%20con%20PxShop&body=Hola,%20quiero%20informacion%20sobre%20una%20pagina%20web" target="_blank" class="btn-primary" style="width:100%; justify-content:center;">
+  Enviar mensaje →
+</a>
+        <p class="contact-note">Respondo en menos de 24 horas. ¡Hablemos!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <a href="#" class="footer-logo">Px<span>Shop</span></a>
+    <p class="footer-copy">© 2026 PxShop. Todos los derechos reservados.</p>
+    <div class="footer-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </footer>
+
+  <!-- ─── JAVASCRIPT ─── -->
+  <script>
+    // ── Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ── Mobile menu
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Smooth internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
