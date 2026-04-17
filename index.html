@@ -64,6 +64,12 @@
       z-index: 9999;
       opacity: 0.4;
     }
+    
+    #logoText span {
+        opacity: 0;
+        display: inline-block;
+        transform: translateY(20px);
+    }
 
     /* ─── TYPOGRAPHY ─── */
     h1, h2, h3, h4 { font-family: 'Sora', sans-serif; letter-spacing: -0.02em; line-height: 1.15; }
@@ -865,7 +871,9 @@
 
   <!-- ─── NAVBAR ─── -->
   <nav id="navbar">
-    <a href="#" class="nav-logo">Px<span>Shop</span></a>
+    <a href="#" class="nav-logo" id="logoText">
+        Px<span>Shop</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#precios">Precios</a></li>
@@ -1098,6 +1106,32 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
     reveals.forEach(el => observer.observe(el));
+
+    //Smooth PxShop text
+    const logo = document.getElementById("logoText");
+const text = "PxShop";
+
+logo.innerHTML = text
+  .split("")
+  .map((l, i) => {
+    const color = i >= 2 ? "#7c6de8" : "#1a1730"; // 👈 negro original
+    return `<span style="color:${color}">${l}</span>`;
+  })
+  .join("");
+
+const spans = logo.querySelectorAll("span");
+
+spans.forEach((span, i) => {
+  span.style.opacity = "0";
+  span.style.display = "inline-block";
+  span.style.transform = "translateY(20px)";
+
+  setTimeout(() => {
+    span.style.transition = "all 0.5s ease";
+    span.style.opacity = "1";
+    span.style.transform = "translateY(0)";
+  }, i * 60);
+});
 
     // ── Smooth internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
