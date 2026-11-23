@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="metal" x2="1" y2="1">
+      <stop stop-color="#2b3a50"/>
+      <stop offset="1" stop-color="#0b101a"/>
+    </linearGradient>
+  </defs>
+  <rect x="3" y="3" width="58" height="58" rx="15" fill="url(#metal)" stroke="#7d9fc0" stroke-width="2"/>
+  <text x="32" y="40" text-anchor="middle" font-family="system-ui,sans-serif" font-size="24" font-weight="800" letter-spacing="1" fill="#eef5ff">PX</text>
+</svg>
